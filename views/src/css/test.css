@@ -1,0 +1,4 @@
+#video:hover {
+    box-shadow: 0 0 20px rgba(75, 73, 73, 0.9);
+    transform: scale(1.02);
+  }
