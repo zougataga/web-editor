@@ -1,6 +1,6 @@
 # movie-state
 
-/!\ PROJET NON FINIT
+<img src="https://www.svgrepo.com/show/352966/attention.svg" width="30"> PROJET NON FINIT
 
 ---
 
