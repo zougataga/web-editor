@@ -11,18 +11,18 @@ app.use(express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 5000
 app.use(express.static(__dirname + '/views'));
 
 // back end
-app.get("/all/:random",(req,res)=>require("./request/all.js")(req,res))
+app.get("/all/:random",(req,res)=>require("./app/all.js")(req,res))
 // Front end
-app.get("/",(req,res)=>require("./request/root.js").u(req,res))
-app.get("/filmvf",(req,res)=>require("./request/film.js").u(req,res))
-app.get("/film/:name",(req,res)=>require("./request/film.js").d(req,res))
+app.get("/",(req,res)=>require("./app/root.js").u(req,res))
+app.get("/filmvf",(req,res)=>require("./app/film.js").u(req,res))
+app.get("/film/:name",(req,res)=>require("./app/film.js").d(req,res))
 
-//app.all('*', (req, res) => require("./request/root.js").d(req,res));
+//app.all('*', (req, res) => require("./app/root.js").d(req,res));
 app.listen(PORT, () => { 
 console.clear()
 console.log(`
 MOVIE STATE V1
---- BY ??????
+--- BY https://github.com/llx404
 `.rainbow)
 console.log(`=> [${new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getUTCSeconds()+":"}] - API ON`.rainbow);
 })
