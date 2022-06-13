@@ -1,6 +1,6 @@
 # movie-state
 
-<img style=" margin: 0;padding: 0;" src="https://www.svgrepo.com/show/352966/attention.svg" width="30" height="15"> PROJET NON FINIT
+<img style="  display: inline-block;font-size: 0.85rem;padding: 0.5375em 0.925em;" src="https://www.svgrepo.com/show/352966/attention.svg" width="30"> PROJET NON FINIT
 
 ---
 
