@@ -1,6 +1,6 @@
 # movie-state
 
-/!\ PROJET NON FINIT
+/!\ PROJET NON FINIT (ps: fait à la rache)
 
 ---
 
