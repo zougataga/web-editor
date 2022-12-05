@@ -145,7 +145,7 @@ body {
     /* background-color: transparent; */
     background-color: var(--bg2);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-  
+
     /* margin: 30px 10px; */
     padding: 20px 15px;
     margin: 30px 10px;
@@ -378,7 +378,10 @@ body {
     list-style: none;
 }
 
-.controls ul li {
+
+
+.controls ul li.fleche,
+.controls ul li.control {
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -387,6 +390,23 @@ body {
     cursor: pointer;
 }
 
-.controls ul li.active {
+.controls ul li.fleche {
+    width: 17px;
+    height: 17px;
+    background: transparent;
+}
+
+.controls ul li.fleche svg {
+    width: 17px;
+    height: 17px;
+    opacity: 0.8;
+    background: var(--active2);
+    fill: #000;
+}
+
+
+.controls ul li.fleche.on svg,
+.controls ul li.control.active {
+    animation: grow-left ease 0.2s forwards;
     background: var(--active);
 }

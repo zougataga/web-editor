@@ -20,11 +20,16 @@ window.onload = () => {
         retourDescription = document.querySelector("#retour"),
 
         items = document.querySelectorAll('.item'),
+        allControls = document.querySelector('.controls'),
         controls = document.querySelectorAll('.control'),
+        fleche = document.querySelectorAll('.fleche'),
+        fleche1 = document.querySelector('#fleche1'),
+        fleche2 = document.querySelector('#fleche2'),
+
         headerItems = document.querySelectorAll('.item-header'),
         descriptionItems = document.querySelectorAll('.item-description'),
         activeDelay = .76,
-        interval = 25000;
+        interval = 10000;
 
     const biographie = `Né le 19 décembre 1987 à Lyon, Karim Benzema est passé du statut d'espoir du football français à celui de star incontestée. Si son talent et son jeu de jambes font pâlir de jalousie de nombreux passionnés, Karim Benzema fait aussi parler de lui pour ses écarts de conduite. Formé par le club de l'Olympique Lyonnais, il rejoint l'équipe première en 2005 à tout juste 17 ans. Dès lors, le jeune footballeur n'a de cesse de progresser, si bien qu'en 2009 Karim Benzema est convoité par le célèbre club espagnol du Real de Madrid. Coaché par José Mourinho, il évolue alors dans la cour des très grands aux côtés de Cristiano Ronaldo ou d'Iker Casillas. Si son jeu fait le bonheur des Merengues, son rôle au sein de l'équipe de France est de plus en plus décrié. Côté vie privée, Karim Benzema est papa d'une petite Mélia, née le 3 février 2014, avec Chloé, sa compagne depuis 2011. Mais le couple se sépare et le sportif retrouve l'amour au bras de Cora Gauthier. Le couple donne naissance à un garçon prénommé Ibrahim, en 2017.`.split(" ");
     bioDescription.innerHTML = biographie.map(e => `<span class="vertical-part"><b>${e}</b></span>`).join("\n");
@@ -45,17 +50,75 @@ window.onload = () => {
         const slider = {
             init: () => {
                 controls.forEach(control => control.addEventListener('click', (e) => { slider.clickedControl(e) }));
+
+
+                fleche1.querySelector("svg").addEventListener("click", async (e) => slider.clickedFleche(e));
+                fleche2.querySelector("svg").addEventListener("click", async (e) => slider.clickedFleche(e));
+
                 controls[current].classList.add('active');
                 items[current].classList.add('active');
             },
+
             nextSlide: () => {
                 slider.reset();
                 if (current === items.length - 1) current = -1;
                 current++;
+                slider.verifFleche(current);
                 controls[current].classList.add('active');
                 items[current].classList.add('active');
                 slider.transitionDelay(headerItems);
                 slider.transitionDelay(descriptionItems);
+            },
+            verifFleche: (dataIndex) => {
+                fleche1.classList.add("on");
+                fleche2.classList.add("on");
+                // if (dataIndex == 0) {
+                //     fleche1.classList.remove("on");
+                //     fleche2.classList.add("on");
+                // } else if (dataIndex == 1) {
+                //     fleche1.classList.add("on");
+                //     fleche2.classList.add("on");
+                // } else if (dataIndex == 2) {
+                //     fleche1.classList.add("on");
+                //     fleche2.classList.remove("on");
+                // }
+            },
+            clickedFleche: (e) => {
+                let target;
+                const s1 = fleche1.querySelector("svg");
+                const s2 = fleche2.querySelector("svg");
+
+                const tg = e.target.dataset.index;
+
+                if (s1.dataset.index == tg) target = fleche1;
+                else if (s2.dataset.index == tg) target = fleche2;
+
+                if (target && target.classList.contains("on")) {
+                    slider.reset();
+                    clearInterval(intervalF);
+
+                    const active = controls[current];
+                    let dataIndex = Number(active.dataset.index);
+
+                    if (dataIndex == 0 || dataIndex == 1) dataIndex = dataIndex + 1;
+                    else dataIndex = 0;
+
+                    slider.verifFleche(dataIndex);
+              
+
+                    items.forEach((item, index) => {
+                        if (index === dataIndex) {
+                            item.classList.add('active');
+                        }
+                    });
+                    current = dataIndex;
+                    active.classList.remove("active");
+                    controls[current].classList.add("active");
+                    slider.transitionDelay(headerItems);
+                    slider.transitionDelay(descriptionItems);
+                    intervalF = setInterval(slider.nextSlide, interval);
+
+                }
             },
             clickedControl: (e) => {
                 slider.reset();
@@ -64,12 +127,14 @@ window.onload = () => {
                 const control = e.target,
                     dataIndex = Number(control.dataset.index);
 
+                slider.verifFleche(dataIndex);
+
                 control.classList.add('active');
                 items.forEach((item, index) => {
                     if (index === dataIndex) {
                         item.classList.add('active');
                     }
-                })
+                });
                 current = dataIndex;
                 slider.transitionDelay(headerItems);
                 slider.transitionDelay(descriptionItems);
