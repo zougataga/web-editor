@@ -1,0 +1,268 @@
+/* BASE */
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* LOADER */
+
+.preload {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background: #22232e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    margin-top: -13px;
+    margin-left: -13px;
+    border-radius: 60px;
+
+    border: 4px solid #fff;
+    border-left-color: transparent;
+
+    animation: loader 0.8s linear infinite;
+}
+
+@keyframes loader {
+
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+
+
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+
+}
+
+/* PAGE */
+.page {
+    display: flex;
+    height: calc(100% - 30px);
+    width: 100%;
+    overflow: hidden;
+
+}
+
+/* CODE */
+
+.code {
+    width: 50%;
+    height: 100%;
+    background-color: #22232e;
+    min-width: 200px;
+}
+
+.code header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.code header img {
+    margin-right: 8px;
+    width: 20px;
+}
+
+
+/* RESIZER */
+
+.resizer.vertical {
+    margin: 0 -5px;
+    cursor: col-resize;
+    border: 8px solid #22232e;
+}
+
+.resizer.horizontal {
+    margin: -5px 0;
+    cursor: row-resize;
+    width: 100%;
+    /* border: 8px solid #22232e; */
+}
+
+.resizer {
+    z-index: 1;
+    box-sizing: content-box;
+    background-clip: content-box;
+
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* CONSOLE */
+
+.console {
+    display: none;
+
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    margin: 0;
+    bottom: 100%;
+
+    height: 180px;
+    width: 100%;
+
+    overflow: hidden;
+    color: #fff;
+    background-color: #15151c;
+
+}
+
+.console header {
+    cursor: row-resize;
+    z-index: 3;
+
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    background-color: #0b0b0f;
+}
+
+.console .affichage {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow-y: auto;
+    height: 150px;
+
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+
+
+/* PREVIEW */
+
+.preview {
+    z-index: -1;
+    width: 50%;
+    height: 100%;
+    min-width: 200px;
+}
+
+.preview iframe {
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* FOOTER */
+.footer {
+    background: #22232e;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    padding: 5px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    /* -webkit-justify-content: space-between; */
+    -ms-flex-pack: justify;
+    /* justify-content: space-between; */
+    white-space: nowrap;
+}
+
+.footer .left {
+    display: flex;
+    flex-direction: flex-end;
+    width: 100%;
+}
+
+.footer button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    position: relative;
+    font-family: inherit;
+    height: 20px;
+    font-size: 0.7rem;
+    text-shadow: none;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none !important;
+    font-weight: 400 !important;
+    cursor: pointer;
+    background: #555;
+    color: #fff;
+    padding: 4px;
+    margin-right: 5px;
+    border: 5px solid transparent;
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+
+    transition: all 0.3s ease;
+}
+
+.footer button:hover {
+    background: #444;
+}
+
+/* .footer button#clear {
+    background: #c13a3a;
+}
+.footer button#clear:hover {
+    background: #962a2a;
+} */

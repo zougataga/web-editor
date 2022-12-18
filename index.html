@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Web Editor</title>
+    <!-- BASE -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- FW -->
+    <script src="./assets/lib/monaco-editor.js"></script>
+    <script src="./assets/lib/FileSaver.js"></script>
+    <script src="./assets/lib/jszip.min.js"></script>
+</head>
+
+<body>
+    <!-- LOADER -->
+    <section class="preload">
+        <div class="loader"></div>
+    </section>
+    <!-- PAGE -->
+    <section class="page">
+        <!-- CODE -->
+        <div class="code">
+            <!-- HTML -->
+            <header class="resizer horizontal" id="sep1"><img src="./assets/img/html.png" alt=""> HTML</header>
+            <div data="sep1" lang="html" value="&lt;h1>test&lt;/h1>" oninput="preview()"></div>
+            <!-- CSS -->
+            <header class="resizer horizontal" id="sep2"><img src="./assets/img/css.png" alt=""> CSS</header>
+            <div data="sep2" lang="css" value="body {
+   background-color: #44475a;
+   padding: 15px;
+   color: #fff
+}" oninput="preview()"></div>
+            <!-- JS -->
+            <header class="resizer horizontal" id="sep3"><img src="./assets/img/js.png" alt=""> JAVASCRIPT</header>
+            <div data="sep3" lang="javascript" oninput="preview()"></div>
+        </div>
+        <!-- SEP -->
+        <span role="presentation" class="resizer vertical"></span>
+        <!-- PREVIEW -->
+        <div class="preview"><iframe id="preview"></iframe></div>
+    </section>
+    <!-- FOOTER -->
+    <section class="footer">
+        <!-- CONSOLE -->
+        <section class="console">
+            <!-- HEADER -->
+            <header>
+                <div class="left">
+                    Console
+                </div>
+                <button>Clear</button>
+                <button id="closeConsole">X</button>
+            </header>
+            <!-- RETURN -->
+            <div class="affichage">
+                <h1>CONSOLE PAS FINIT</h1>
+            </div>
+
+        </section>
+        <!-- BUTTON -->
+        <div class="left">
+            <button id="console">Console</button>
+        </div>
+        <button id="export">Export Zip</button>
+        <button id="clear">Clear all</button>
+    </section>
+    <!-- SCRIPT -->
+    <script src="./assets/js/script.js"></script>
+    <script>const dracula = { "base": "vs-dark", "inherit": true, "rules": [{ "background": "282a36", "token": "" }, { "foreground": "6272a4", "token": "comment" }, { "foreground": "f1fa8c", "token": "string" }, { "foreground": "bd93f9", "token": "constant.numeric" }, { "foreground": "bd93f9", "token": "constant.language" }, { "foreground": "bd93f9", "token": "constant.character" }, { "foreground": "bd93f9", "token": "constant.other" }, { "foreground": "ffb86c", "token": "variable.other.readwrite.instance" }, { "foreground": "ff79c6", "token": "constant.character.escaped" }, { "foreground": "ff79c6", "token": "constant.character.escape" }, { "foreground": "ff79c6", "token": "string source" }, { "foreground": "ff79c6", "token": "string source.ruby" }, { "foreground": "ff79c6", "token": "keyword" }, { "foreground": "ff79c6", "token": "storage" }, { "foreground": "8be9fd", "fontStyle": "italic", "token": "storage.type" }, { "foreground": "50fa7b", "fontStyle": "underline", "token": "entity.name.class" }, { "foreground": "50fa7b", "fontStyle": "italic underline", "token": "entity.other.inherited-class" }, { "foreground": "50fa7b", "token": "entity.name.function" }, { "foreground": "ffb86c", "fontStyle": "italic", "token": "variable.parameter" }, { "foreground": "ff79c6", "token": "entity.name.tag" }, { "foreground": "50fa7b", "token": "entity.other.attribute-name" }, { "foreground": "8be9fd", "token": "support.function" }, { "foreground": "6be5fd", "token": "support.constant" }, { "foreground": "66d9ef", "fontStyle": " italic", "token": "support.type" }, { "foreground": "66d9ef", "fontStyle": " italic", "token": "support.class" }, { "foreground": "f8f8f0", "background": "ff79c6", "token": "invalid" }, { "foreground": "f8f8f0", "background": "bd93f9", "token": "invalid.deprecated" }, { "foreground": "cfcfc2", "token": "meta.structure.dictionary.json string.quoted.double.json" }, { "foreground": "6272a4", "token": "meta.diff" }, { "foreground": "6272a4", "token": "meta.diff.header" }, { "foreground": "ff79c6", "token": "markup.deleted" }, { "foreground": "50fa7b", "token": "markup.inserted" }, { "foreground": "e6db74", "token": "markup.changed" }, { "foreground": "bd93f9", "token": "constant.numeric.line-number.find-in-files - match" }, { "foreground": "e6db74", "token": "entity.name.filename" }, { "foreground": "f83333", "token": "message.error" }, { "foreground": "eeeeee", "token": "punctuation.definition.string.begin.json - meta.structure.dictionary.value.json" }, { "foreground": "eeeeee", "token": "punctuation.definition.string.end.json - meta.structure.dictionary.value.json" }, { "foreground": "8be9fd", "token": "meta.structure.dictionary.json string.quoted.double.json" }, { "foreground": "f1fa8c", "token": "meta.structure.dictionary.value.json string.quoted.double.json" }, { "foreground": "50fa7b", "token": "meta meta meta meta meta meta meta.structure.dictionary.value string" }, { "foreground": "ffb86c", "token": "meta meta meta meta meta meta.structure.dictionary.value string" }, { "foreground": "ff79c6", "token": "meta meta meta meta meta.structure.dictionary.value string" }, { "foreground": "bd93f9", "token": "meta meta meta meta.structure.dictionary.value string" }, { "foreground": "50fa7b", "token": "meta meta meta.structure.dictionary.value string" }, { "foreground": "ffb86c", "token": "meta meta.structure.dictionary.value string" }], "colors": { "editor.foreground": "#f8f8f2", "editor.background": "#282a36", "editor.selectionBackground": "#44475a", "editor.lineHighlightBackground": "#44475a", "editorCursor.foreground": "#f8f8f0", "editorWhitespace.foreground": "#3B3A32", "editorIndentGuide.activeBackground": "#9D550FB0", "editor.selectionHighlightBorder": "#222218" } };</script>
+</body>
+
+</html>
