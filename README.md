@@ -5,3 +5,5 @@
     <a target="_blank" href="https://zougataga.github.io/web-editor/">Site</a> 
   </p>
 </div>
+
+<img src="https://cdn.discordapp.com/attachments/1018282509764669550/1054004042063429742/image.png"/>
